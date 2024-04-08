@@ -23,8 +23,14 @@ common extensions
         OverloadedRecordDot
         OverloadedStrings
 
+common language
+    default-language: GHC2021
+
 library
-    import:           warnings, extensions
+    import:           
+      warnings
+      , extensions
+      , language
     exposed-modules:
         CoxPH
       , CoxPH.CenterAndScale
@@ -43,8 +49,10 @@ library
     default-language: GHC2021
 
 test-suite time-to-event-test
-    import:           warnings, extensions
-    default-language: GHC2021
+    import:           
+      warnings
+      , extensions
+      , language
     other-modules:
         TestCoxPH.TestCoxPHUpdateNewtonRaphson
     -- other-extensions:
@@ -60,3 +68,21 @@ test-suite time-to-event-test
       , text >= 2
       , time-to-event
       , vector ^>= 0.13
+
+benchmark time-to-event-bench
+    import:           
+      warnings
+      , extensions
+      , language
+    type: exitcode-stdio-1.0
+    main-is: Main.hs
+
+    build-depends:    
+      base >=4.14
+      , bytestring
+      , cassava
+      , tasty-bench
+      , text
+      , time-to-event
+      , vector
+    hs-source-dirs:   bench
